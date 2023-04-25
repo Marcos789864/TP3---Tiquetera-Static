@@ -10,13 +10,49 @@ public class Cliente
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
    public  Cliente()
    {
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
    }
+
+
+
+//hola
+
+
+
+
+
+
+
+
 
 
 
@@ -31,3 +67,4 @@ public class Cliente
     TotalAbonado = typeA;
    }
 }
+

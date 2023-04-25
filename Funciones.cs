@@ -22,12 +22,6 @@ public static class Funciones
     }
 
 
-
-
-
-
-
-
     public static int IngresarEnteroEnRango(string msj, int minimo, int maximo)
     {
         int entero;
@@ -38,10 +32,6 @@ public static class Funciones
         }
         return entero;
     }
-
-
-
-
 
 
 
@@ -60,10 +50,6 @@ public static class Funciones
 
 
 
-
-
-
-
     public  static int numRandom()
     {
         int num;
@@ -75,20 +61,12 @@ public static class Funciones
 
 
 
-    public static Cliente CrearCliente()
+    public static int CrearCliente()
     {
-        int dni = 0;
-       if(Tiquetera.DevolverUltimoID() == 0)
-       {
-        dni = 0;
-       }
-       else
-       {
-         dni = Tiquetera.DevolverUltimoID();
-       }
        
         string nombre = IngresarTexto("Ingrese su nombre ");
         string apellido = IngresarTexto("Ingrese su apellido ");
+        int dni = IngresarEntero("Ingrese su DNI");
         DateTime FechaInscripcion = IngresarFecha("Ingrese la fecha en la que desea ir ");
         int TipoEntrada = IngresarEnteroEnRango("Ingrese el tipo de entrada: (1) Dia 1 15000, (2) Dia 2 30000, (3) Dia 3 10000, (4) Todos los días 40000 ",1,4);
         int totalAbonado = 0;
@@ -108,11 +86,13 @@ public static class Funciones
         {
             totalAbonado = 40000;
         }
-       
-        dni++;
-       
-        return new Cliente(dni,nombre,apellido,FechaInscripcion,TipoEntrada,totalAbonado);
+
+
+
+
+        Cliente p = new Cliente(dni,apellido,nombre,FechaInscripcion,TipoEntrada,totalAbonado);  
+        int id  = Tiquetera.AgregarCliente(p);  
+        return id;    
     }
-
-
 }
+

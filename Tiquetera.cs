@@ -1,38 +1,82 @@
 public static class Tiquetera
 {
     private static Dictionary <int,Cliente> DicCliente = new Dictionary<int, Cliente>();
-    private static int UltimoIDEntrada;
+    private static int UltimoIDEntrada = 0;
+
+
+
+
 
 
    
     public static int DevolverUltimoID()
     {  
-        int ultimoID = 0;
-        foreach(int clave in DicCliente.Keys)
-        {
-            ultimoID = clave;
-        }
-        return ultimoID;
+        return UltimoIDEntrada;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
     public static int AgregarCliente(Cliente p)
     {    
-        DicCliente.Add(p.DNI,p);
-        int id = p.DNI;
-        return p.DNI;
+        UltimoIDEntrada++;
+        DicCliente.Add(UltimoIDEntrada,p);
+        return UltimoIDEntrada;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
     public static Cliente BuscarCliente(int idEntrada)
     {
+        if(DicCliente.ContainsKey(idEntrada) == true)
+        {
             Cliente p =  DicCliente[idEntrada];
-           return p;              
+            Console.WriteLine(p.DNI);
+           return p;
+        }
+        else
+        {
+            return null;
+        }
+                       
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -66,7 +110,7 @@ public static class Tiquetera
     }
 
 
-    public static List<string> EstadisticasTiquetera()
+    public static List<string> EstadisticasTiquetera( )
     {
             List<string> Lista = new List <string>();
             int[] TipoEntrada = {0,0,0,0};
@@ -82,27 +126,10 @@ public static class Tiquetera
 
             foreach(Cliente p in DicCliente.Values)
             {
-                if(p.TipoEntrada == 1)
-                {
-                    TipoEntrada[0]++;
-                    Recaudacion[0] += 15000;
-                }
-                else if(p.TipoEntrada == 2)
-                {
-                    TipoEntrada[1]++;
-                    Recaudacion[1] += 30000;
-                }
-                if(p.TipoEntrada == 3)
-                {
-                    TipoEntrada[2]++;
-                    Recaudacion[2] += 10000;
-                }
-                if(p.TipoEntrada == 4)
-                {
-                    TipoEntrada[3]++;
-                    Recaudacion[3] += 40000;
-                }
+            TipoEntrada[p.TipoEntrada-1]++;
+            Recaudacion[p.TipoEntrada-1] += p.TotalAbonado;
             }
+           
        
             for(int i = 0; i < TipoEntrada.Length;i++)
             {
@@ -120,5 +147,8 @@ public static class Tiquetera
         return Lista;
 
 
+
+
     }
 }
+

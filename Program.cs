@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿ using System.Collections.Generic;
 
 
     int eleccion = 0;
@@ -7,8 +7,11 @@
     {switch(eleccion)
         {
         case 1:
-            Cliente p = Funciones.CrearCliente();
-            Tiquetera.AgregarCliente(p);  
+             Funciones.CrearCliente();
+            int id = Tiquetera.DevolverUltimoID();
+            Console.WriteLine("Su id es: " + id );
+
+
         break;
         case 2:
             List<string> list = Tiquetera.EstadisticasTiquetera();
@@ -19,8 +22,18 @@
         break;
         case 3:
             int ingresarID = Funciones.IngresarEntero("Ingrese el id de una persona y le mostraremos su informacion");
-            Cliente G = Tiquetera.BuscarCliente(ingresarID);
-            Console.WriteLine("Cliente: Nombre: " + G.Nombre + " Apellido: " + G.Apellido + " DNI: " + G.DNI + " FechaInscripcion" + G.FechaInscripcion + " TipoEntrada: " + G.TipoEntrada + " TotalAbonado: " + G.TotalAbonado);
+           
+            if(Tiquetera.BuscarCliente == null)
+            {
+                Console.WriteLine("Aun no se ha anotado nadie");
+            }
+            else
+            {
+                Cliente G = Tiquetera.BuscarCliente(ingresarID);
+                Console.WriteLine("Cliente: Nombre: " + G.Apellido + " Apellido: " + G.Apellido + " DNI: " + G.DNI + " FechaInscripcion" + G.FechaInscripcion + " TipoEntrada: " + G.TipoEntrada + " TotalAbonado: " + G.TotalAbonado);
+            }
+            Console.ReadLine();
+           
         break;
         case 4:
             ingresarID = Funciones.IngresarEntero("Ingrese el id de una persona y podra modificar la entrada del cliente");
@@ -54,4 +67,5 @@
         }
         eleccion = Funciones.IngresarEnteroEnRango("Ingrese la opcion que desea ejecutar; (1) Nueva inscripcion, (2) Obtner Estadisticas del evento, (3) Buscar cliente, (4) Cambiar entrada cliente, (5) Salir",1,5);
     }
+
 
